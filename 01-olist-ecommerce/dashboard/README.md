@@ -9,16 +9,16 @@ Connected live to Databricks Gold layer tables via SQL Warehouse.
 ## Pages
 
 ### Overview
-![Overview](screenshots/overview.png)
+![Overview](screenshots/Oilst%20Dashboard-1%20Overview.png)
 
 ### Customer Behavior
-![Customer Behavior](screenshots/customer_behavior.png)
+![Customer Behavior](screenshots/Oilst%20Dashboard-2%20Customer.png)
 
 ### Seller Performance
-![Seller Performance](screenshots/seller_performance.png)
+![Seller Performance](screenshots/Oilst%20Dashboard-3%20Seller%20Perf.png)
 
 ### Delivery & Reviews
-![Delivery & Reviews](screenshots/delivery_reviews.png)
+![Delivery & Reviews](screenshots/Oilst%20Dashboard-4%20Delivery.png)
 
 ## File
-[Download the full .pbix file](olist_dashboard.pbix)
+[Download the full .pbix file](Oilst%20Dashboard.pbix)
