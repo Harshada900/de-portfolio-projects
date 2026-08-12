@@ -1,6 +1,6 @@
 # Notebooks
 
-Databricks notebooks implementing the Olist pipeline's medallion architecture (Bronze → Silver → Quality Gate → Gold).
+Databricks notebooks implementing the Olist pipeline's medallion architecture (Bronze -> Silver -> Quality Gate -> Gold).
 
 - **01_ingest_bronze.py** — Ingests raw Olist CSVs into Bronze Delta tables with explicit schemas.
 - **02_transform_silver_v2.py** — Applies schema enforcement, business rule validation, FK integrity checks, and quarantine logic to produce Silver tables.
