@@ -632,7 +632,7 @@ print(orphaned_products_fk_tagged_v2_final.count())
 
 # COMMAND ----------
 
-#orphaned_products_fk_tagged_v2_final.write.format("delta").mode("append").save(quarantine_path + "order_items")
+orphaned_products_fk_tagged_v2_final.write.format("delta").mode("append").save(quarantine_path + "order_items")
 print(spark.read.format("delta").load(quarantine_path + "order_items").count())
 
 # COMMAND ----------
