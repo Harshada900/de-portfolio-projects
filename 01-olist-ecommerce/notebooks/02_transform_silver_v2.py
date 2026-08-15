@@ -115,9 +115,6 @@ spark.read.format("delta").load(silver_path + "orders").count()
 
 spark.read.format("delta").load(quarantine_path + "orders").count()
 
-# COMMAND ----------
-
-print(int("01310"))
 
 # COMMAND ----------
 
