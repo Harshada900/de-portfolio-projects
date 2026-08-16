@@ -153,10 +153,10 @@ print(f"Dimension date rows: {dim_date.count()}")
 
 # COMMAND ----------
 
-'''dim_customer.write.format("delta").mode("overwrite").save(gold_path + "dim_customer")
+dim_customer.write.format("delta").mode("overwrite").save(gold_path + "dim_customer")
 dim_seller.write.format("delta").mode("overwrite").save(gold_path + "dim_seller")
 dim_product.write.format("delta").mode("overwrite").save(gold_path + "dim_product")
-dim_date.write.format("delta").mode("overwrite").save(gold_path + "dim_date")'''
+dim_date.write.format("delta").mode("overwrite").save(gold_path + "dim_date")
 
 # COMMAND ----------
 
@@ -345,7 +345,9 @@ dim_seller_scd_final.filter(col("seller_id") == "3442f8959a84dea7ee197c632cb2df1
 
 # COMMAND ----------
 
-#dim_seller_scd_final.write.format("delta").mode("overwrite").save(gold_path + "dim_seller_scd")
+# NOTE: This SCD Type 2 change is a simulated/manual example for demonstration purposes,
+# since the raw Olist dataset has no real seller attribute history to detect changes from.
+dim_seller_scd_final.write.format("delta").mode("overwrite").save(gold_path + "dim_seller_scd")
 print(spark.read.format("delta").load(gold_path + "dim_seller_scd").count())
 
 # COMMAND ----------
@@ -778,8 +780,8 @@ spark.sql("""
 
 # COMMAND ----------
 
-#corridor_stats.write.format("delta").mode("overwrite").save(gold_path + "kpi_delivery_gap_corridor")
-#flagged_corridors.write.format("delta").mode("overwrite").save(gold_path + "kpi_delivery_gap_flagged")
+corridor_stats.write.format("delta").mode("overwrite").save(gold_path + "kpi_delivery_gap_corridor")
+flagged_corridors.write.format("delta").mode("overwrite").save(gold_path + "kpi_delivery_gap_flagged")
 
 print(spark.read.format("delta").load(gold_path + "kpi_delivery_gap_corridor").count())
 print(spark.read.format("delta").load(gold_path + "kpi_delivery_gap_flagged").count())
@@ -787,7 +789,7 @@ print(spark.read.format("delta").load(gold_path + "kpi_delivery_gap_flagged").co
 
 # COMMAND ----------
 
-"""dim_customer.write.format("delta").mode("overwrite").saveAsTable("workspace.default.dim_customer")
+dim_customer.write.format("delta").mode("overwrite").saveAsTable("workspace.default.dim_customer")
 dim_seller.write.format("delta").mode("overwrite").saveAsTable("workspace.default.dim_seller")
 dim_product.write.format("delta").mode("overwrite").saveAsTable("workspace.default.dim_product")
 dim_date.write.format("delta").mode("overwrite").saveAsTable("workspace.default.dim_date")
@@ -797,7 +799,7 @@ cohort_kpi.write.format("delta").mode("overwrite").saveAsTable("workspace.defaul
 seller_final_tiers.write.format("delta").mode("overwrite").saveAsTable("workspace.default.kpi_seller_delivery_tier")
 review_score_rolling.write.format("delta").mode("overwrite").saveAsTable("workspace.default.kpi_review_score_decay")
 revenue_concentration.write.format("delta").mode("overwrite").saveAsTable("workspace.default.kpi_revenue_concentration")
-corridor_stats.write.format("delta").mode("overwrite").saveAsTable("workspace.default.kpi_delivery_gap_corridor")"""
+corridor_stats.write.format("delta").mode("overwrite").saveAsTable("workspace.default.kpi_delivery_gap_corridor")
 
 # COMMAND ----------
 
