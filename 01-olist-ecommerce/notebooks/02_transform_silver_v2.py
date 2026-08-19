@@ -14,18 +14,7 @@ print(f"Batch id: {batch_id}")
 
 # COMMAND ----------
 
-#inferSchema is expensive (for large files) bcz spark reads data twice even though olist data is not huge still i will perform schema enforcement
-orders_schema = StructType([
-StructField("order_id", StringType(), False),
-StructField("customer_id", StringType(), False),
-StructField("order_status", StringType(), True),
-StructField("order_purchase_timestamp", TimestampType(), True),
-StructField("order_approved_at", TimestampType(), True),
-StructField("order_delivered_carrier_date", TimestampType(), True),
-StructField("order_delivered_customer_date", TimestampType(), True),
-StructField("order_estimated_delivery_date", TimestampType(), True)
 
-])
 
 # COMMAND ----------
 
@@ -118,16 +107,6 @@ spark.read.format("delta").load(quarantine_path + "orders").count()
 
 # COMMAND ----------
 
-customers_schema = StructType([
-    StructField("customer_id", StringType(), False),
-    StructField("customer_unique_id", StringType(), False),
-    StructField("customer_zip_code_prefix", StringType(), True),
-    StructField("customer_city", StringType(), True),
-    StructField("customer_state", StringType(), True)
-])
-
-# COMMAND ----------
-
 #2nd table customers
 df_customers_raw = spark.read.format("delta").load(bronze_path + "olist_customers_dataset")
 print(f"Customers raw count: {df_customers_raw.count()}")
@@ -196,17 +175,6 @@ bad_customers.write.format("delta").mode("overwrite").save(quarantine_path + "cu
 print(spark.read.format("delta").load(silver_path + "customers").count())
 print(spark.read.format("delta").load(quarantine_path + "customers").count())
 
-# COMMAND ----------
-
-order_items_schema = StructType([
-    StructField("order_id", StringType(), False),
-    StructField("order_item_id", IntegerType(), True),
-    StructField("product_id", StringType(), False),
-    StructField("seller_id", StringType(), False),
-    StructField("shipping_limit_date", TimestampType(), True),
-    StructField("price", DoubleType(), True),
-    StructField("freight_value", DoubleType(), True)
-])
 
 # COMMAND ----------
 
