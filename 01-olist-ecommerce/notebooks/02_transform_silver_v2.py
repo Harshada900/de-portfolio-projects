@@ -567,9 +567,6 @@ print(spark.read.format("delta").load(quarantine_path + "order_items").count())
 
 # COMMAND ----------
 
-#print("orphaned_products_fk:", orphaned_products_fk.count())
-
-#print("orphaned_products_fk_tagged_final:", orphaned_products_fk_tagged_final.count())
 
 # COMMAND ----------
 
