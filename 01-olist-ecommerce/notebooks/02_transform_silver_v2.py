@@ -594,7 +594,17 @@ print(orphaned_products_fk_tagged_v2_final.count())
 
 # COMMAND ----------
 
-orphaned_products_fk_tagged_v2_final.write.format("delta").mode("append").save(quarantine_path + "order_items")
+from delta.tables import DeltaTable
+
+if DeltaTable.isDeltaTable(spark, quarantine_path + "order_items"):
+    dt = DeltaTable.forPath(spark, quarantine_path + "order_items")
+    dt.alias("target").merge(
+        orphaned_products_fk_tagged_v2_final.alias("source"),
+        "target.order_id = source.order_id AND target.order_item_id = source.order_item_id"
+    ).whenNotMatchedInsertAll().execute()
+else:
+    orphaned_products_fk_tagged_v2_final.write.format("delta").save(quarantine_path + "order_items")
+
 print(spark.read.format("delta").load(quarantine_path + "order_items").count())
 
 # COMMAND ----------
