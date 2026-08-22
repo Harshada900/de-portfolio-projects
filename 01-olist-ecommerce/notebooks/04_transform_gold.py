@@ -66,13 +66,6 @@ reviews_silver.filter(col("order_id") == "f63a31c3349b87273468ff7e66852056") \
 
 # COMMAND ----------
 
-reviews_silver.groupBy("order_id").agg(
-    spark_min("review_score").alias("min_score"),
-    spark_max("review_score").alias("max_score")
-).filter(col("min_score") != col("max_score")).count()
-
-# COMMAND ----------
-
 review_window = Window.partitionBy("order_id").orderBy(desc("review_answer_timestamp"))
 
 reviews_deduped = reviews_silver.withColumn("review_rank", row_number().over(review_window)) \
